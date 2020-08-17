@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using WooliesTechChallenge.Service.Configuration;
 
 namespace WooliesTechChallenge.Controllers
 {
@@ -11,10 +13,16 @@ namespace WooliesTechChallenge.Controllers
     [Route("api/[controller]")]
     public class TechChallengeController : ControllerBase
     {
+        private WooliesX _configuration;
+        public TechChallengeController(IOptions<WooliesX> configuration)
+        {
+            _configuration = configuration?.Value;
+        }
+
         [HttpGet("user")]
         public IActionResult Get()
         {
-            return Ok(new { name = "Suman Palikhe", token = "fd627ca4-707f-4eb3-9b33-6a03264e09ed" });
+            return Ok(new { name = _configuration.UserName , token = _configuration.Token });
         }
     }
 }

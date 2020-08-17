@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WooliesTechChallenge.Service.Configuration;
 
 namespace WooliesTechChallenge
 {
@@ -26,6 +27,8 @@ namespace WooliesTechChallenge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.Configure<WooliesX>(options => Configuration.GetSection("WooliesX").Bind(options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
