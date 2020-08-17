@@ -33,6 +33,7 @@ namespace WooliesTechChallenge
             services.Configure<WooliesX>(options => Configuration.GetSection(nameof(WooliesX)).Bind(options));
 
             services.AddTransient<IApiCaller, ApiCaller>();
+            services.AddTransient<IProductSorter, ProductSorter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

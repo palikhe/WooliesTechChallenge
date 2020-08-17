@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -16,19 +17,24 @@ namespace WooliesTechChallenge.Controllers
     {
         private WooliesX _configuration;
 
-        private IApiCaller _apiCaller;
+        private IProductSorter _productSorter;
 
-        public TechChallengeController(IOptions<WooliesX> configuration, IApiCaller apiCaller)
+        public TechChallengeController(IOptions<WooliesX> configuration, IProductSorter productSorter)
         {
             _configuration = configuration?.Value;
-            _apiCaller = apiCaller;
+            _productSorter = productSorter;
         }
 
         [HttpGet("user")]
         public IActionResult Get()
         {
-
             return Ok(new { name = _configuration.UserName , token = _configuration.Token });
+        }
+
+        [HttpGet("sort")]
+        public async Task<IActionResult> SortProduct([FromQuery, Required]string sortOption)
+        {
+            return Ok(await _productSorter.SortProduct(sortOption));
         }
     }
 }
