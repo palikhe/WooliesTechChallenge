@@ -18,10 +18,14 @@ namespace WooliesTechChallenge.Controllers
 
         private IProductSorter _productSorter;
 
-        public TechChallengeController(IOptions<WooliesX> configuration, IProductSorter productSorter)
+        private ITrolleyService _trolleryService;
+
+        public TechChallengeController(IOptions<WooliesX> configuration, IProductSorter productSorter,
+            ITrolleyService trolleryService)
         {
             _configuration = configuration?.Value;
             _productSorter = productSorter;
+            _trolleryService = trolleryService;
         }
 
         [HttpGet("user")]
@@ -40,17 +44,7 @@ namespace WooliesTechChallenge.Controllers
         [Route("trolleyTotal")]
         public async Task<IActionResult> TrolleyTotal(TrolleyRequest request)
         {
-            //foreach (var special in request.Specials.SelectMany(x => x.Quantities))
-            //{
-            //    if (!(request.Quantities.Where(x => x.Name == special.Name)?.Count() >= special.Quantity))
-            //    {
-            //        return false;
-            //    }
-            //}
-
-            request.Quantities.Where(x => x.Name == "Test Product D").FirstOrDefault().Quantity = 1;
-
-            return Ok(await Task.FromResult(request));
+            return Ok(_trolleryService.GetLowestTotal(request));
         }
     }
 }

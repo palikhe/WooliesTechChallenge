@@ -54,44 +54,6 @@ namespace WooliesTechChallenge.Service.Infrastructure
             _products.Sort((x, y) => { return productPopularity.TryGetValue(y.Name).CompareTo(productPopularity.TryGetValue(x.Name)); });
 
             return _products;
-
-
-            //return new List<ProductWithQuantity>()
-            //{
-            //    new ProductWithQuantity()
-            //    {
-            //        Name = "Test Product A",
-            //        Price = 99.99m,
-            //        Quantity = 0
-            //    },
-            //    new ProductWithQuantity()
-            //    {
-            //        Name = "Test Product B",
-            //        Price = 101.99m,
-            //        Quantity = 0
-            //    },
-
-            //    new ProductWithQuantity()
-            //    {
-            //        Name = "Test Product F",
-            //        Price = 999999999999.0m,
-            //        Quantity = 0
-            //    },
-
-            //    new ProductWithQuantity()
-            //    {
-            //        Name = "Test Product C",
-            //        Price = 10.99m,
-            //        Quantity = 0
-            //    },
-
-            //    new ProductWithQuantity()
-            //    {
-            //        Name = "Test Product D",
-            //        Price = 5,
-            //        Quantity = 0
-            //    }
-            //};
         }
 
         private Dictionary<string, int> GenerateProductPopularity(List<ShopperHistoryReponse> shopperHistories)

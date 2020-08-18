@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WooliesTechChallenge.Service.Domain
 {
@@ -29,6 +31,23 @@ namespace WooliesTechChallenge.Service.Domain
     {
         public List<ProductCount> Quantities { get; set; }
         public int Total { get; set; }
+    }
+
+    public class Order
+    {
+        public List<ProductWithQuantity> ProductWithQuantities { get; set; } = new List<ProductWithQuantity>();
+
+        public List<Special> SpecialApplied { get; set; } = new List<Special>();
+
+        public decimal Total
+        {
+            get
+            {
+                var totalWithProductWithQuantities = ProductWithQuantities.Select(x => x.Price * x.Quantity).Sum();
+                var totalForSpecials = SpecialApplied.Select(x => x.Total).Sum();
+                return totalWithProductWithQuantities + totalForSpecials;
+            }
+        }
     }
 
 }
