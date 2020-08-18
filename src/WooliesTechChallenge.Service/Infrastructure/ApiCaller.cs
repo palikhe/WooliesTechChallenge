@@ -1,18 +1,12 @@
 ﻿using Microsoft.Extensions.Options;
-using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WooliesTechChallenge.Service.Configuration;
 using WooliesTechChallenge.Service.Domain;
 using WooliesTechChallenge.Service.Interface;
 using WooliesTechChallenge.Service.Utility;
-using Newtonsoft;
-using Newtonsoft.Json;
 
 namespace WooliesTechChallenge.Service.Infrastructure
 {

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooliesTechChallenge.Servic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{29D0FC93-9F12-4D75-A347-5E407B0FD373}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooliesTechChallenge.Service.Tests", "tests\WooliesTechChallenge.Service.Tests\WooliesTechChallenge.Service.Tests.csproj", "{639374F5-0143-45C8-A48C-7AF8111BFCF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{ECF766BC-D4F8-445A-A542-F346B36E153C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECF766BC-D4F8-445A-A542-F346B36E153C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECF766BC-D4F8-445A-A542-F346B36E153C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{639374F5-0143-45C8-A48C-7AF8111BFCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{639374F5-0143-45C8-A48C-7AF8111BFCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{639374F5-0143-45C8-A48C-7AF8111BFCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{639374F5-0143-45C8-A48C-7AF8111BFCF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B63271A3-ADB2-4B05-8BE4-89D97B599D69} = {6AD2CF92-0C54-4464-9E1B-7C24FC7D1816}
 		{ECF766BC-D4F8-445A-A542-F346B36E153C} = {6AD2CF92-0C54-4464-9E1B-7C24FC7D1816}
+		{639374F5-0143-45C8-A48C-7AF8111BFCF9} = {29D0FC93-9F12-4D75-A347-5E407B0FD373}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA8325FE-4D0B-4670-A021-C041A105D877}

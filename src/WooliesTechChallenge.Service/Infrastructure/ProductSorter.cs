@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using WooliesTechChallenge.Service.Domain;
 using WooliesTechChallenge.Service.Interface;
+using WooliesTechChallenge.Service.Utility;
 
 namespace WooliesTechChallenge.Service.Infrastructure
 {
@@ -15,14 +12,12 @@ namespace WooliesTechChallenge.Service.Infrastructure
     {
         private IApiCaller _apiCaller;
 
-        private Dictionary<string, ProductWithQuantity> _productDictionary = new Dictionary<string, ProductWithQuantity>();
-
         public ProductSorter(IApiCaller apiCaller)
         {
             _apiCaller = apiCaller;
         }
 
-        public async Task<List<ProductWithQuantity>> SortProduct(string sortOptions)
+        public async Task<List<ProductWithQuantity>> SortProducts(string sortOptions)
         {
             switch (sortOptions)
             {
@@ -54,10 +49,52 @@ namespace WooliesTechChallenge.Service.Infrastructure
 
             var productPopularity = GenerateProductPopularity(shopperHistories);
 
-            return productPopularity.Select(x => _productDictionary[x.Key]).ToList();
+            var _products = await _apiCaller.GetProducts();
+
+            _products.Sort((x, y) => { return productPopularity.TryGetValue(y.Name).CompareTo(productPopularity.TryGetValue(x.Name)); });
+
+            return _products;
+
+
+            //return new List<ProductWithQuantity>()
+            //{
+            //    new ProductWithQuantity()
+            //    {
+            //        Name = "Test Product A",
+            //        Price = 99.99m,
+            //        Quantity = 0
+            //    },
+            //    new ProductWithQuantity()
+            //    {
+            //        Name = "Test Product B",
+            //        Price = 101.99m,
+            //        Quantity = 0
+            //    },
+
+            //    new ProductWithQuantity()
+            //    {
+            //        Name = "Test Product F",
+            //        Price = 999999999999.0m,
+            //        Quantity = 0
+            //    },
+
+            //    new ProductWithQuantity()
+            //    {
+            //        Name = "Test Product C",
+            //        Price = 10.99m,
+            //        Quantity = 0
+            //    },
+
+            //    new ProductWithQuantity()
+            //    {
+            //        Name = "Test Product D",
+            //        Price = 5,
+            //        Quantity = 0
+            //    }
+            //};
         }
 
-        private IOrderedEnumerable<KeyValuePair<string, int>> GenerateProductPopularity(List<ShopperHistoryReponse> shopperHistories)
+        private Dictionary<string, int> GenerateProductPopularity(List<ShopperHistoryReponse> shopperHistories)
         {
             var productPopularity = new Dictionary<string, int>();
 
@@ -72,12 +109,11 @@ namespace WooliesTechChallenge.Service.Infrastructure
                     else
                     {
                         productPopularity[product.Name] = 1;
-                        _productDictionary[product.Name] = product;
                     }
                 }
             }
 
-            return productPopularity.OrderByDescending(x => x.Value);
+            return productPopularity;
         }
     }
 }

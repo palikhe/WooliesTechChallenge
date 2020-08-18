@@ -6,6 +6,6 @@ namespace WooliesTechChallenge.Service.Interface
 {
     public interface IProductSorter
     {
-        Task<List<ProductWithQuantity>> SortProduct(string sortOptions);
+        Task<List<ProductWithQuantity>> SortProducts(string sortOptions);
     }
 }
